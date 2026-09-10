@@ -167,6 +167,7 @@
             align-items: center;
             min-height: 80vh;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            position: relative; /* Added for absolute positioning of admin button */
         }
 
         .hero-subtitle {
@@ -500,15 +501,23 @@
             cursor: pointer;
         }
 
-        /* Secret trigger area */
-        .secret-trigger {
+        /* Visible Admin Button */
+        .btn-admin-access {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 50px;
-            opacity: 0;
-            cursor: default;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        .btn-admin-access:hover {
+            background-color: rgba(255, 255, 255, 0.4);
         }
 
     </style>
@@ -550,10 +559,10 @@
     <!-- MAIN INVITATION CONTAINER -->
     <div class="container fade-in" id="main-content">
         
-        <!-- Secret trigger for Admin Panel (bottom left of hero) -->
-        <div class="secret-trigger" onclick="promptAdmin()"></div>
-
         <header class="hero">
+            <!-- Visible Admin Button -->
+            <button class="btn-admin-access" onclick="openAdminPanel()">Admin</button>
+
             <div class="hero-subtitle">The Wedding Of</div>
             <h1 class="hero-title">Atia<br>&<br>Hikam</h1>
             <div class="hero-date">27 . 09 . 2026</div>
@@ -664,31 +673,24 @@
 
     <script>
         // --- 1. HANDLE GUEST NAME FROM URL ---
-        // Function to get URL parameters
         function getQueryParam(param) {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(param);
         }
 
-        // Get guest name ('to' parameter) from URL
         const guestName = getQueryParam('to');
         if (guestName) {
-            // Decode URI component to handle spaces and special characters
             document.getElementById('cover-guest-name').innerText = decodeURIComponent(guestName);
         }
 
         // --- 2. HANDLE COVER & AUDIO ---
         const audio = document.getElementById('bg-music');
         let isPlaying = false;
-        let clickCount = 0; // For secret admin access
 
         function openInvitation() {
-            // Remove cover
             document.getElementById('cover-page').classList.add('open');
-            // Unlock body scrolling
             document.body.classList.remove('locked');
             
-            // Try to play audio (requires user interaction, which this button provides)
             try {
                 audio.play().then(() => {
                     isPlaying = true;
@@ -696,7 +698,6 @@
                 }).catch(err => {
                     console.log("Auto-play prevented by browser:", err);
                     document.getElementById('music-control').classList.add('visible');
-                    // Stop spinning icon if blocked
                     document.getElementById('music-icon').classList.remove('spin');
                 });
             } catch (e) {
@@ -709,7 +710,6 @@
             if (isPlaying) {
                 audio.pause();
                 icon.classList.remove('spin');
-                // Change icon to play or static (simplified for this example)
                 icon.style.opacity = "0.5";
             } else {
                 audio.play();
@@ -719,22 +719,16 @@
             isPlaying = !isPlaying;
         }
 
-        // --- 3. HANDLE SECRET ADMIN PANEL ---
-        function promptAdmin() {
-            clickCount++;
-            if (clickCount === 3) {
-                // After 3 clicks on the secret area, prompt for password
-                const password = prompt("Masukkan Secret Key:");
-                if (password === "atia123") {
-                    document.getElementById('admin-panel').style.display = 'flex';
-                } else if (password !== null) {
-                    alert("Secret Key Salah!");
-                }
-                clickCount = 0; // reset
-            }
-            
-            // Reset click count if they stop clicking after a short time
-            setTimeout(() => { clickCount = 0; }, 2000);
+        // --- 3. HANDLE ADMIN PANEL ---
+        // Function to open admin panel directly
+        function openAdminPanel() {
+             const password = prompt("Masukkan Password Admin:");
+             // Default password is 'atiadanhikam', you can change this!
+             if (password === "atiadanhikam") {
+                 document.getElementById('admin-panel').style.display = 'flex';
+             } else if (password !== null) {
+                 alert("Password Salah!");
+             }
         }
 
         function closeAdmin() {
@@ -752,34 +746,60 @@
             }
 
             // Get current base URL (without query parameters)
-            const baseUrl = window.location.origin + window.location.pathname;
+            // Using window.location.href, removing anything after '?' or '#'
+            let baseUrl = window.location.href.split('?')[0].split('#')[0];
             
-            // Encode the name for URL (turns spaces into %20 or +)
             const encodedName = encodeURIComponent(inputName);
             
-            // Create final URL
             const finalUrl = `${baseUrl}?to=${encodedName}`;
             
-            // Display URL
             const linkDiv = document.getElementById('generated-link');
             linkDiv.innerText = finalUrl;
             linkDiv.style.display = 'block';
 
-            // Copy to clipboard
-            try {
-                // Fallback for older browsers
-                const tempInput = document.createElement("input");
-                tempInput.value = finalUrl;
-                document.body.appendChild(tempInput);
-                tempInput.select();
-                document.execCommand("copy");
-                document.body.removeChild(tempInput);
-                
-                document.getElementById('copy-msg').style.display = 'block';
-                setTimeout(() => { document.getElementById('copy-msg').style.display = 'none'; }, 3000);
-            } catch (err) {
-                console.error('Failed to copy', err);
+            // More robust copy to clipboard method
+            if (navigator.clipboard && window.isSecureContext) {
+                // Navigator clipboard api method'
+                navigator.clipboard.writeText(finalUrl).then(() => {
+                    showCopyMessage();
+                }, (err) => {
+                    console.error('Failed to copy text: ', err);
+                    fallbackCopyTextToClipboard(finalUrl);
+                });
+            } else {
+                // Fallback method
+                fallbackCopyTextToClipboard(finalUrl);
             }
+        }
+        
+        function fallbackCopyTextToClipboard(text) {
+             const textArea = document.createElement("textarea");
+             textArea.value = text;
+             // Avoid scrolling to bottom
+             textArea.style.top = "0";
+             textArea.style.left = "0";
+             textArea.style.position = "fixed";
+             document.body.appendChild(textArea);
+             textArea.focus();
+             textArea.select();
+
+             try {
+                 const successful = document.execCommand('copy');
+                 if(successful){
+                     showCopyMessage();
+                 } else {
+                     alert("Gagal menyalin link. Silakan copy manual teks di atas.");
+                 }
+             } catch (err) {
+                 console.error('Fallback: Oops, unable to copy', err);
+                 alert("Gagal menyalin link. Silakan copy manual teks di atas.");
+             }
+             document.body.removeChild(textArea);
+        }
+
+        function showCopyMessage() {
+            document.getElementById('copy-msg').style.display = 'block';
+            setTimeout(() => { document.getElementById('copy-msg').style.display = 'none'; }, 3000);
         }
 
         // --- 4. COUNTDOWN TIMER ---
