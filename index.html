@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Undangan Pernikahan - Atia & Hikam</title>
+    <!-- Menggunakan font elegan dari Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #7b8e78; /* Sage Green elegan */
+            --secondary-color: #4a5a48; /* Dark Green untuk teks */
+            --accent-color: #d4af37; /* Gold klasik */
+            --bg-light: #fdfdfd;
+            --bg-floral: #f4f7f4;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #e0e5e0; /* Warna latar luar untuk tampilan desktop */
+            color: var(--secondary-color);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 480px; /* Lebar maksimal menyerupai layar HP */
+            margin: 0 auto;
+            background-color: var(--bg-light);
+            box-shadow: 0 0 30px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+        }
+
+        section {
+            padding: 60px 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero {
+            background-color: var(--primary-color);
+            background-image: linear-gradient(to bottom, rgba(123, 142, 120, 0.8), rgba(74, 90, 72, 0.9));
+            color: white;
+            padding: 80px 20px;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .hero-subtitle {
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .hero-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4.5rem;
+            margin: 10px 0;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            line-height: 1.2;
+        }
+
+        .hero-date {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.5);
+            border-bottom: 1px solid rgba(255,255,255,0.5);
+            padding: 10px 20px;
+        }
+
+        .bismillah {
+            font-family: 'Amiri', serif; /* Font arab, fallback ke serif */
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .text-intro {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 40px;
+        }
+
+        .mempelai-box {
+            margin: 40px 0;
+        }
+
+        .mempelai-name {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .mempelai-desc {
+            font-size: 0.85rem;
+            color: #777;
+            font-weight: 300;
+        }
+
+        .mempelai-ortu {
+            font-weight: 500;
+            color: var(--secondary-color);
+            margin-top: 5px;
+            display: block;
+        }
+
+        .ampersand {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            color: var(--accent-color);
+            margin: 10px 0;
+            line-height: 1;
+        }
+
+        .event-section {
+            background-color: var(--bg-floral);
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid #e2e8e2;
+            border-radius: 20px;
+            padding: 40px 20px;
+            margin: 20px 0;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+            position: relative;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 1px solid rgba(123, 142, 120, 0.2);
+            border-radius: 12px;
+            pointer-events: none;
+        }
+
+        .card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .date-text {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+            margin: 10px 0;
+        }
+
+        .hijri-date {
+            font-size: 0.9rem;
+            font-style: italic;
+            color: #888;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .time-loc {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px dashed #ccc;
+        }
+
+        .address {
+            font-size: 0.9rem;
+            color: #555;
+            margin-top: 10px;
+            font-weight: 300;
+        }
+
+        .countdown-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+        }
+
+        .countdown-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .cd-item {
+            background: #ffffff;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 15px 10px;
+            border-radius: 12px;
+            min-width: 65px;
+            box-shadow: 0 4px 10px rgba(123, 142, 120, 0.15);
+        }
+
+        .cd-number {
+            display: block;
+            font-size: 1.8rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            line-height: 1;
+        }
+
+        .cd-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+            display: block;
+            font-weight: 500;
+        }
+
+        .inviting-section {
+            background-color: #ffffff;
+            text-align: left;
+        }
+
+        .inviting-box {
+            background: var(--bg-floral);
+            padding: 30px 25px;
+            border-radius: 15px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .inviting-title {
+            color: var(--primary-color);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .inviting-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .inviting-list li {
+            font-size: 0.85rem;
+            color: #555;
+            margin-bottom: 10px;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .inviting-list li::before {
+            content: "•";
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .footer-thanks {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-names {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            color: var(--accent-color);
+            margin: 10px 0;
+        }
+
+        .footer-families {
+            font-size: 0.85rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        /* Animasi sederhana */
+        .fade-in {
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container fade-in">
+        <header class="hero">
+            <div class="hero-subtitle">The Wedding Of</div>
+            <h1 class="hero-title">Atia<br>&<br>Hikam</h1>
+            <div class="hero-date">27 . 09 . 2026</div>
+        </header>
+
+        <section>
+            <div class="bismillah">﷽</div>
+            <p class="text-intro">
+                Maha suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan. Ya Allah, dengan ridho-Mu perkenankanlah putra-putri kami:
+            </p>
+            
+            <div class="mempelai-box">
+                <h2 class="mempelai-name">Atiatur Rahmah</h2>
+                <div class="mempelai-desc">
+                    Putri ke-3 dari
+                    <span class="mempelai-ortu">Kel. Bpk. H. Sopi & Ibu Nawiyah</span>
+                </div>
+            </div>
+
+            <div class="ampersand">&</div>
+
+            <div class="mempelai-box">
+                <h2 class="mempelai-name">Muhammad Hikam</h2>
+                <div class="mempelai-desc">
+                    Putra ke-8 dari
+                    <span class="mempelai-ortu">Kel. Bpk. KH. Sarwadi (Alm) & Ibu Hj. Siti</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="event-section">
+            <p class="text-intro" style="margin-bottom: 20px;">
+                Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk hadir pada acara pernikahan putra-putri kami:
+            </p>
+            
+            <div class="card">
+                <h3 class="card-title">Akad Nikah & Resepsi</h3>
+                <div class="date-text">Minggu, 27 September 2026</div>
+                <span class="hijri-date">(15 Rabi'ul Akhir 1448 H)</span>
+                
+                <div class="time-loc">
+                    <p style="font-weight: 500; color: var(--secondary-color);">Pukul 11:00 WIB s/d Selesai</p>
+                    <div class="address">
+                        <strong>Bertempat di Kediaman Mempelai Wanita:</strong><br>
+                        Kp. Babakan Liud / Lukut RT. 01/010<br>
+                        Desa Kalong Liud, Kec. Nanggung<br>
+                        Kab. Bogor
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-intro" style="font-size: 1rem; margin-top: 30px; margin-bottom: 0;">
+                Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.
+            </p>
+        </section>
+
+        <section>
+            <h3 class="countdown-title">Menuju Hari Bahagia</h3>
+            <div class="countdown-wrapper" id="countdown">
+                <div class="cd-item">
+                    <span class="cd-number" id="days">00</span>
+                    <span class="cd-label">Hari</span>
+                </div>
+                <div class="cd-item">
+                    <span class="cd-number" id="hours">00</span>
+                    <span class="cd-label">Jam</span>
+                </div>
+                <div class="cd-item">
+                    <span class="cd-number" id="minutes">00</span>
+                    <span class="cd-label">Menit</span>
+                </div>
+                <div class="cd-item">
+                    <span class="cd-number" id="seconds">00</span>
+                    <span class="cd-label">Detik</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="inviting-section">
+            <div class="inviting-box">
+                <h4 class="inviting-title">Turut Mengundang:</h4>
+                <ul class="inviting-list">
+                    <li>Kel. Besar Abah KH. Dulhadi (Alm) (Ponpes Darussuluk)</li>
+                    <li>Kel. Besar Abah Ismail (SBJ Bogor)</li>
+                    <li>Kel. Besar Ponpes Al-Ibtida (Hambaro)</li>
+                    <li>Kel. Besar Ponpes Arriyadhotul Muta'alimin (Lukut)</li>
+                    <li>Kel. Besar Ponpes Al-Jazirah (Sipak)</li>
+                    <li>Kel. Besar Bani Juki</li>
+                    <li>Kel. Besar Bani Emong</li>
+                    <li>Bpk. KH. Ahrip (Tokoh Masyarakat)</li>
+                    <li>Bpk. KH. Jenal Abidin (Tokoh Masyarakat)</li>
+                    <li>Bpk. Jani Nurjaman (Kades Kalong Liud)</li>
+                    <li>Bpk. Supardi (Ketua RW. 010)</li>
+                    <li>Bpk. Sungkono (Ketua RT. 01)</li>
+                </ul>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-thanks">Wassalamu'alaikum Warahmatullahi Wabarakatuh</div>
+            <p style="font-size: 0.9rem; margin-top: 20px;">Kami yang berbahagia,</p>
+            <h2 class="footer-names">Atia & Hikam</h2>
+            <div class="footer-families">
+                Kel. Bpk H. Sopi &<br>Kel. Bpk KH. Sarwadi (Alm)
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Set tanggal tujuan (27 September 2026, 11:00 WIB)
+        const countDownDate = new Date("Sep 27, 2026 11:00:00").getTime();
+
+        const x = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countDownDate - now;
+
+            // Kalkulasi hari, jam, menit, detik
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Tampilkan ke HTML dengan tambahan angka 0 jika dibawah 10
+            document.getElementById("days").innerText = days < 10 ? '0' + days : days;
+            document.getElementById("hours").innerText = hours < 10 ? '0' + hours : hours;
+            document.getElementById("minutes").innerText = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById("seconds").innerText = seconds < 10 ? '0' + seconds : seconds;
+
+            // Jika waktu sudah habis
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countdown").innerHTML = 
+                    "<div style='color: var(--primary-color); font-family: \"Cormorant Garamond\", serif; font-size: 1.5rem; font-weight: 600; text-align: center; width: 100%;'>Acara Sedang Berlangsung</div>";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
